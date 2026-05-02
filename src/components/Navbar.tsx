@@ -26,58 +26,52 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, delay: 2.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 backdrop-blur-xl border-b ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-white/75 shadow-lg shadow-[var(--accent)]/8 border-[var(--accent)]/10"
-          : "bg-[#fdf2ec]/40 border-[var(--accent)]/8"
+          ? "bg-black/85 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/40"
+          : "bg-transparent border-b border-white/10"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Logo + nombre */}
         <motion.a
           href="#inicio"
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.04 }}
           className="flex items-center gap-3"
         >
           <Image
-            src="/images/logo.jpg"
+            src="/images/logoredondo-clean.webp"
             alt="Od. Carolina Salva"
-            width={44}
-            height={44}
+            width={40}
+            height={40}
             className="rounded-full"
           />
-          <span
-            className={`font-semibold text-xl tracking-wide transition-colors duration-300 ${
-              scrolled ? "text-[var(--accent-dark)]" : "text-[#3d2c22]"
-            }`}
-          >
+          <span className="font-bold text-xl tracking-wide text-white drop-shadow-sm">
             Od. Carolina Salva
           </span>
         </motion.a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}>
           {links.map((link) => (
             <motion.a
               key={link.href}
               href={link.href}
               whileHover={{ y: -2 }}
-              className={`relative text-base font-semibold tracking-wide transition-colors duration-300 group ${
-                scrolled
-                  ? "text-[#5a3e32] hover:text-[var(--accent-dark)]"
-                  : "text-[#5a3e32] hover:text-[var(--accent-dark)]"
-              }`}
+              className="relative text-base font-semibold text-white hover:text-[#FF4586] transition-colors duration-300 group"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent)] transition-all duration-300 group-hover:w-full rounded-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FF4586] transition-all duration-300 group-hover:w-full rounded-full" />
             </motion.a>
           ))}
+
           <motion.a
             href="https://wa.me/542213992512"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[var(--accent-dark)] text-white px-6 py-2.5 rounded-full text-base font-semibold shadow-lg shadow-[var(--accent)]/25 hover:bg-[#8a4e33] hover:shadow-xl hover:shadow-[var(--accent)]/40 transition-all duration-300"
+            className="bg-gradient-to-r from-[#FF4586] to-[#CC1F63] hover:from-[#25D366] hover:to-[#128C7E] text-white px-6 py-2.5 rounded-full text-base font-semibold shadow-lg shadow-[#FF4586]/30 hover:shadow-[#25D366]/40 transition-all duration-300"
           >
             Pedir Turno
           </motion.a>
@@ -86,28 +80,20 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-2.5 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 active:bg-white/20 transition-colors"
           aria-label="Menu"
         >
           <motion.span
             animate={mobileOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            className={`block w-6 h-0.5 transition-colors ${
-              scrolled ? "bg-gray-800" : "bg-[#3d2c22]"
-            }`}
+            className="block w-6 h-0.5 bg-white"
           />
           <motion.span
             animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
-            className={`block w-6 h-0.5 transition-colors ${
-              scrolled ? "bg-gray-800" : "bg-[#3d2c22]"
-            }`}
+            className="block w-6 h-0.5 bg-white"
           />
           <motion.span
-            animate={
-              mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }
-            }
-            className={`block w-6 h-0.5 transition-colors ${
-              scrolled ? "bg-gray-800" : "bg-[#3d2c22]"
-            }`}
+            animate={mobileOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+            className="block w-6 h-0.5 bg-white"
           />
         </button>
       </div>
@@ -119,7 +105,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[#fdf2ec]/95 backdrop-blur-xl border-t border-[var(--accent)]/10"
+            className="md:hidden bg-black/90 backdrop-blur-xl border-t border-white/10"
           >
             <div className="flex flex-col items-center gap-6 py-8">
               {links.map((link) => (
@@ -127,7 +113,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-[#5a3e32] hover:text-[var(--accent-dark)] text-lg font-semibold transition-colors"
+                  className="text-white hover:text-[#FF4586] text-lg font-semibold transition-colors"
                 >
                   {link.label}
                 </a>
@@ -136,7 +122,7 @@ export default function Navbar() {
                 href="https://wa.me/542213992512"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[var(--accent-dark)] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#8a4e33] transition-colors"
+                className="bg-gradient-to-r from-[#FF4586] to-[#CC1F63] hover:from-[#25D366] hover:to-[#128C7E] text-white px-8 py-3 rounded-full font-semibold transition-all duration-300"
               >
                 Pedir Turno
               </a>

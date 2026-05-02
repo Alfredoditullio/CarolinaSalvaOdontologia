@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       "Tu sonrisa, nuestra pasion. Odontologia integral con enfoque en estetica natural. Gestion profesional con DentalCore.",
     type: "website",
     locale: "es_AR",
-    images: ["/images/logo.jpg"],
+    images: ["/images/logo.webp"],
     siteName: "Od. Carolina Salva",
   },
   robots: "index, follow",
@@ -82,7 +82,7 @@ export default function RootLayout({
               telephone: "+54 221 399 2512",
               url: "https://www.dentalcore.app",
               sameAs: ["https://instagram.com/od.salva"],
-              image: "/images/logo.jpg",
+              image: "/images/logo.webp",
               areaServed: {
                 "@type": "City",
                 name: "Berisso",

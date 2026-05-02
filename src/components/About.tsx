@@ -3,192 +3,235 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import FloatingElements from "./FloatingElements";
-import ScrollReveal from "./ScrollReveal";
 
 export default function About() {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
       id="sobre-mi"
       ref={ref}
-      className="relative py-24 md:py-32 bg-white overflow-hidden"
+      className="relative py-24 md:py-32 bg-black"
     >
-      <FloatingElements count={5} variant="light" className="text-[var(--accent)]/20" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-[var(--accent)]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--accent-light)]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+      {/* Diente flotante — esquina superior derecha */}
+      <motion.div
+        className="absolute top-10 right-8 pointer-events-none z-0 opacity-20"
+        animate={{ y: [0, -14, 0], rotate: [8, 14, 8] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Image src="/images/diente-clean.webp" alt="" width={90} height={90} />
+      </motion.div>
 
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Video side */}
-          <ScrollReveal direction="left">
-            <div className="relative">
-              <div className="relative z-10">
-                <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-[var(--accent)]/20">
-                  <video
-                    src="/images/presentacion.mp4"
-                    controls
-                    playsInline
-                    preload="metadata"
-                    poster="/images/carolina.jpeg"
-                    className="w-full rounded-3xl max-h-[70vh] object-cover"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-[var(--accent-dark)] shadow-md pointer-events-none">
-                    Presentacion
-                  </div>
-                </div>
+      {/* Diente flotante — inferior izquierda, más chico */}
+      <motion.div
+        className="absolute bottom-16 left-10 pointer-events-none z-0 opacity-15"
+        animate={{ y: [0, 10, 0], rotate: [-12, -6, -12] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      >
+        <Image src="/images/diente-clean.webp" alt="" width={60} height={60} />
+      </motion.div>
 
-                {/* Floating badge */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={inView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  whileHover={{ scale: 1.05, y: -3 }}
-                  className="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-5 border border-rose-100 cursor-default"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-[var(--accent)]/10 rounded-xl flex items-center justify-center">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round">
-                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
-                        <polyline points="22 4 12 14.01 9 11.01" />
-                      </svg>
-                    </div>
-                    <div>
-                      <div className="text-sm font-bold text-gray-800">Matricula Provincial</div>
-                      <div className="text-xs text-gray-500">M.P. 25485</div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
+      {/* Fondo: glow fucsia sutil izquierda */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: `
+            radial-gradient(ellipse at 0% 60%, rgba(255,69,134,0.12) 0%, transparent 55%),
+            radial-gradient(ellipse at 100% 20%, rgba(204,31,99,0.08) 0%, transparent 50%)
+          `,
+        }}
+      />
 
-              <motion.div
-                className="absolute -top-4 -left-4 w-full h-full border-2 border-[var(--accent)]/20 rounded-3xl"
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: 1 } : {}}
-                transition={{ delay: 0.3 }}
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
+          <span className="inline-block bg-[#FF4586]/15 text-[#FF4586] border border-[#FF4586]/30 px-5 py-2 rounded-full text-xl font-bold mb-5 tracking-wide">
+            Sobre Mi
+          </span>
+          <h2
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Hola, soy{" "}
+            <span className="bg-gradient-to-r from-[#FF7AAB] to-[#FF4586] bg-clip-text text-transparent">
+              Carolina
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Grid principal: video izquierda, info derecha */}
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 items-start">
+
+          {/* Video con glow */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="relative"
+          >
+            {/* Glow detrás del video */}
+            <div
+              className="absolute -inset-3 rounded-3xl"
+              style={{
+                background: "radial-gradient(ellipse, rgba(255,69,134,0.3) 0%, transparent 70%)",
+                filter: "blur(30px)",
+              }}
+            />
+            <div className="relative rounded-3xl overflow-hidden border border-[#FF4586]/30 shadow-2xl shadow-[#FF4586]/20">
+              <video
+                src="/images/presentacion.mp4"
+                controls
+                playsInline
+                preload="metadata"
+                poster="/images/carolina.webp"
+                className="w-full max-h-[70vh] object-cover"
               />
             </div>
-          </ScrollReveal>
 
-          {/* Text side */}
-          <ScrollReveal direction="right" delay={0.2}>
-            <span className="inline-block bg-[var(--accent)]/10 text-[var(--accent)] px-4 py-1.5 rounded-full text-sm font-semibold mb-6">
-              Sobre Mi
-            </span>
-
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Hola, soy{" "}
-              <span className="text-[var(--accent)]">Carolina</span>
-            </h2>
-
-            <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
-              <p>
-                Soy odontologa y me apasiona ayudar a que cada paciente se
-                sienta seguro con su sonrisa.
-              </p>
-              <p>
-                Trabajo con un enfoque en{" "}
-                <strong className="text-gray-800">
-                  estetica natural y salud integral
-                </strong>
-                , priorizando la comodidad y la confianza en cada consulta.
-                Actualmente me estoy especializando en{" "}
-                <strong className="text-gray-800">implantes dentales</strong> y
-                en{" "}
-                <strong className="text-gray-800">
-                  estetica facial con acido hialuronico
-                </strong>
-                .
-              </p>
-              <p>
-                Creo que una sonrisa no solo cambia tu imagen,{" "}
-                <span className="text-[var(--accent)] font-semibold">
-                  cambia tu seguridad
-                </span>
-                .
-              </p>
-            </div>
-
-            {/* Announcement - pulsing */}
+            {/* Badge matrícula flotante */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={
-                inView
-                  ? {
-                      opacity: 1,
-                      scale: [1, 1.02, 1],
-                      boxShadow: [
-                        "0 0 0 0 rgba(201,123,90,0)",
-                        "0 0 0 8px rgba(201,123,90,0.15)",
-                        "0 0 0 0 rgba(201,123,90,0)",
-                      ],
-                    }
-                  : {}
-              }
-              transition={{
-                opacity: { delay: 0.5, duration: 0.5 },
-                scale: { delay: 1, duration: 2, repeat: Infinity, ease: "easeInOut" },
-                boxShadow: { delay: 1, duration: 2, repeat: Infinity, ease: "easeInOut" },
-              }}
-              className="mt-6 bg-gradient-to-r from-[var(--accent)]/10 to-[var(--accent-light)]/10 border border-[var(--accent)]/20 rounded-2xl p-4 flex items-start gap-3 cursor-default"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.6 }}
+              className="absolute -bottom-5 -right-5 bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl px-5 py-4 shadow-xl"
             >
-              <span className="text-2xl mt-0.5">🏥</span>
-              <div>
-                <div className="text-sm font-bold text-[var(--accent-dark)] flex items-center gap-2">
-                  Proximamente: Consultorio propio
-                  <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#FF4586]/20 rounded-xl flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF4586" strokeWidth="2" strokeLinecap="round">
+                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
                 </div>
-                <div className="text-xs text-gray-500 mt-0.5">
-                  A partir de mayo 2026 en Berisso
+                <div>
+                  <div className="text-sm font-bold text-white">Matricula Provincial</div>
+                  <div className="text-xs text-white/50">M.P. 25485</div>
                 </div>
               </div>
             </motion.div>
+          </motion.div>
 
-            {/* Highlights with hover tilt */}
-            <div className="grid grid-cols-2 gap-4 mt-8">
+          {/* Derecha: texto + cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex flex-col gap-6"
+          >
+            {/* Párrafos */}
+            <div className="space-y-4 text-white/60 leading-relaxed text-base">
+              <p>
+                Graduada de la{" "}
+                <strong className="text-white">Universidad Nacional de La Plata (UNLP)</strong>.
+                Me apasiona ayudar a que cada paciente se sienta seguro con su sonrisa.
+              </p>
+              <p>
+                Trabajo con un enfoque en{" "}
+                <strong className="text-white">estetica natural y salud integral</strong>,
+                priorizando la comodidad y la confianza en cada consulta. Actualmente me
+                estoy especializando en{" "}
+                <strong className="text-white">implantes dentales</strong> y en{" "}
+                <strong className="text-white">estetica facial con acido hialuronico</strong>.
+              </p>
+              <p>
+                Creo que una sonrisa no solo cambia tu imagen,{" "}
+                <span className="text-[#FF7AAB] font-semibold">cambia tu seguridad</span>.
+              </p>
+            </div>
+
+            {/* Anuncio consultorio */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.5 }}
+              className="bg-[#FF4586]/10 border border-[#FF4586]/25 rounded-2xl p-4 flex items-start gap-3"
+            >
+              <span className="text-2xl">🏥</span>
+              <div>
+                <div className="text-sm font-bold text-[#FF7AAB] flex items-center gap-2">
+                  Proximamente: Consultorio propio
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                </div>
+                <div className="text-xs text-white/40 mt-0.5">A partir de mayo 2026 en Berisso</div>
+              </div>
+            </motion.div>
+
+            {/* Cards highlight en glass */}
+            <div className="grid grid-cols-2 gap-3">
               {[
                 {
-                  icon: "M12 2C9.5 2 7.5 3.5 7 6C6.5 8.5 5 10 4 12C3 14 3 16 4 18C5 20 7 22 8.5 22C10 22 10.5 20 12 20C13.5 20 14 22 15.5 22C17 22 19 20 20 18C21 16 21 14 20 12C19 10 17.5 8.5 17 6C16.5 3.5 14.5 2 12 2Z",
+                  icon: "M12 4v16m-8-8h16",
                   title: "Odontologia Integral",
-                  desc: "Ninos y adultos",
+                  desc: "Niños y adultos",
+                  color: "#FF4586",
+                  glow: "rgba(255,69,134,0.35)",
                 },
                 {
                   icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
                   title: "Estetica Natural",
                   desc: "Resultados armoniosos",
+                  color: "#FF7AAB",
+                  glow: "rgba(255,122,171,0.35)",
                 },
                 {
                   icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
                   title: "Confianza",
                   desc: "Tu comodidad, prioridad",
+                  color: "#F472B6",
+                  glow: "rgba(244,114,182,0.35)",
                 },
                 {
                   icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z M15 11a3 3 0 11-6 0 3 3 0 016 0z",
                   title: "Berisso",
                   desc: "Atencion personalizada",
+                  color: "#CC1F63",
+                  glow: "rgba(204,31,99,0.35)",
                 },
               ].map((item, i) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 16 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6 + i * 0.1 }}
-                  whileHover={{ y: -5, scale: 1.03 }}
-                  className="bg-gray-50 rounded-2xl p-4 hover:bg-[var(--accent)]/5 hover:shadow-lg hover:shadow-[var(--accent)]/10 transition-all duration-300 group cursor-default"
+                  transition={{ delay: 0.5 + i * 0.08 }}
+                  whileHover={{ y: -6, scale: 1.04 }}
+                  className="relative bg-white/5 border border-white/10 rounded-2xl p-4 transition-all duration-300 cursor-default group overflow-hidden"
+                  style={{ "--card-glow": item.glow, "--card-color": item.color } as React.CSSProperties}
                 >
-                  <div className="w-10 h-10 bg-[var(--accent)]/10 rounded-xl flex items-center justify-center mb-3 group-hover:bg-[var(--accent)]/20 group-hover:scale-110 transition-all duration-300">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d={item.icon} />
-                    </svg>
+                  {/* Fondo que aparece en hover */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
+                    style={{ background: `radial-gradient(ellipse at 30% 50%, ${item.glow} 0%, transparent 70%)` }}
+                  />
+                  {/* Borde fucsia en hover */}
+                  <div
+                    className="absolute inset-0 rounded-2xl border opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{ borderColor: item.color }}
+                  />
+
+                  <div className="relative z-10">
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center mb-3 transition-all duration-300 group-hover:scale-110"
+                      style={{ background: `${item.color}22` }}
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
+                        style={{ stroke: item.color }}
+                      >
+                        <path d={item.icon} />
+                      </svg>
+                    </div>
+                    <div className="font-semibold text-white text-sm group-hover:text-white transition-colors">{item.title}</div>
+                    <div className="text-white/40 text-xs mt-0.5 group-hover:text-white/70 transition-colors">{item.desc}</div>
                   </div>
-                  <div className="font-semibold text-gray-800 text-sm">{item.title}</div>
-                  <div className="text-gray-500 text-xs mt-0.5">{item.desc}</div>
                 </motion.div>
               ))}
             </div>
-          </ScrollReveal>
+          </motion.div>
         </div>
       </div>
     </section>

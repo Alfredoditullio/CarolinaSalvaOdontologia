@@ -89,7 +89,7 @@ export default function SplashScreen({
               className="relative z-10"
             >
               <Image
-                src="/images/logo.jpg"
+                src="/images/logo.webp"
                 alt="Od. Carolina Salva"
                 width={160}
                 height={160}

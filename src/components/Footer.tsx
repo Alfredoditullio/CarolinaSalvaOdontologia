@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
             <Image
-              src="/images/logo.jpg"
+              src="/images/logo.webp"
               alt="Od. Carolina Salva"
               width={36}
               height={36}

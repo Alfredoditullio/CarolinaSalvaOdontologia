@@ -6,8 +6,8 @@ import Image from "next/image";
 
 const images = [
   { src: "/images/diente.png", alt: "Diente", w: 65, h: 65 },
-  { src: "/images/cepillo.png", alt: "Cepillo", w: 50, h: 50 },
-  { src: "/images/corazon.png", alt: "Corazon", w: 45, h: 45 },
+  { src: "/images/cepillo.webp", alt: "Cepillo", w: 50, h: 50 },
+  { src: "/images/corazon.webp", alt: "Corazon", w: 45, h: 45 },
 ];
 
 interface Placement {
@@ -20,9 +20,6 @@ interface Placement {
 }
 
 const placements: Placement[] = [
-  { img: 0, left: 15, top: 12, rotate: -12, size: 0.9, parallaxSpeed: -80 },
-  { img: 1, left: 82, top: 50, rotate: 15, size: 0.75, parallaxSpeed: -100 },
-  { img: 2, left: 60, top: 30, rotate: 8, size: 0.6, parallaxSpeed: -60 },
   { img: 0, left: 10, top: 85, rotate: 20, size: 0.7, parallaxSpeed: -110 },
   { img: 1, left: 85, top: 90, rotate: 12, size: 0.65, parallaxSpeed: -130 },
 ];
