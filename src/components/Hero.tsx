@@ -121,6 +121,12 @@ export default function Hero() {
         style={{ background: "linear-gradient(to right, rgba(255,69,134,0.45) 0%, rgba(255,69,134,0.18) 30%, transparent 55%)" }}
       />
 
+      {/* Mobile: overlay extra central para que el texto sea legible sobre la imagen clara */}
+      <div
+        className="md:hidden absolute inset-0"
+        style={{ background: "rgba(0,0,0,0.38)" }}
+      />
+
       {/* Toque fucsia solo a la derecha, sobre la sonrisa */}
       <div
         className="absolute inset-0"
@@ -266,7 +272,7 @@ export default function Hero() {
             Tu sonrisa,{" "}
             <span className="relative inline-block">
               <span
-                className="bg-gradient-to-r from-[#FF7AAB] via-white to-[#FF4586] bg-clip-text text-transparent italic"
+                className="md:bg-gradient-to-r md:from-[#FF7AAB] md:via-white md:to-[#FF4586] md:bg-clip-text md:text-transparent text-white italic drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]"
                 style={{ fontFamily: "var(--font-script)", fontWeight: 700 }}
               >
                 nuestra pasion
@@ -299,7 +305,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 3.2, duration: 0.8 }}
-            className="text-base md:text-xl text-white/60 max-w-xl mb-12 md:mb-10 leading-relaxed mx-auto md:mx-0"
+            className="text-base md:text-xl text-white/90 md:text-white/60 max-w-xl mb-12 md:mb-10 leading-relaxed mx-auto md:mx-0 drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)] md:drop-shadow-none"
           >
             Odontologia integral con enfoque en estetica natural y salud.
             Priorizando tu comodidad y confianza en cada consulta.
@@ -327,7 +333,7 @@ export default function Hero() {
             <motion.a
               href="#servicios"
               whileHover={{ scale: 1.05, y: -2 }}
-              className="border-2 border-white/25 text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-[var(--accent-dark)] transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto"
+              className="border-2 border-white/70 md:border-white/25 bg-white/10 md:bg-transparent text-white px-8 py-4 rounded-full text-lg font-medium hover:bg-white hover:text-[var(--accent-dark)] transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               Ver Servicios
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
